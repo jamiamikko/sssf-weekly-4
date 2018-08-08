@@ -3,20 +3,34 @@
 require('dotenv').config();
 const https = require('https');
 const http = require('http');
+const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
+const handlebars = require('express-handlebars');
 
 require('./passport')(passport);
 
 const fs = require('fs');
 const mongoose = require('mongoose');
 
+const index = require('./routes/index');
 const images = require('./routes/images');
 const auth = require('./routes/auth');
 
 const express = require('express');
 const app = express();
+
+app.engine(
+  'handlebars',
+  handlebars({
+    extname: 'handlebars',
+    defaultLayout: 'layout',
+    layoutsDir: __dirname + '/views/layouts/'
+  })
+);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'handlebars');
 
 app.use(
   session({
@@ -31,7 +45,7 @@ app.use(passport.session());
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const sslkey = fs.readFileSync('./config/ssl-key.pem');
 const sslcert = fs.readFileSync('./config/ssl-cert.pem');
@@ -71,6 +85,7 @@ db.on('error', (err) => {
   console.log(err);
 });
 
+app.use('/', index);
 app.use('/images', images);
 app.use('/login', auth(passport));
 

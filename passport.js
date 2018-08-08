@@ -24,7 +24,7 @@ module.exports = (passport) => {
 
             if (valid) {
               done(null, {
-                username: data.username
+                username: data.username,
               });
             } else {
               done(null, false, {message: 'Incorrect credentials'});
