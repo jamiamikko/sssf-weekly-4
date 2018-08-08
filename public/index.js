@@ -101,8 +101,6 @@ const submitEditForm = (event, id) => {
 
   const jsonData = JSON.stringify(data);
 
-  console.log(jsonData);
-
   fetch('https://localhost:3000/images/' + id, {
     method: 'POST',
     body: jsonData,
@@ -112,7 +110,6 @@ const submitEditForm = (event, id) => {
     }
   })
     .then((data) => {
-      console.log(data);
       closeModal();
 
       getImages().then((res) => {
@@ -129,7 +126,6 @@ const openEditModal = (event) => {
 
   getImagesById(id)
     .then((res) => {
-      console.log(res);
       modal.innerHTML = '';
 
       const template = document.querySelector('#edit-modal');
@@ -263,7 +259,6 @@ const submitForm = (event) => {
     body: formData
   })
     .then(() => {
-      console.log('Success');
       getImages().then((res) => {
         handleData(res);
       });

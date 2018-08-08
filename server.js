@@ -29,12 +29,10 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  console.log(`Serialize user: ${user.username}`);
   done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-  console.log(`Deserialize user: ${user.username}`);
   done(null, user);
 });
 
@@ -42,7 +40,7 @@ app.use(
   session({
     secret: process.env.SECRET,
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: true
   })
 );
 
@@ -58,7 +56,7 @@ const sslcert = fs.readFileSync('./config/ssl-cert.pem');
 
 const options = {
   key: sslkey,
-  cert: sslcert,
+  cert: sslcert
 };
 
 https.createServer(options, app).listen(3000);
@@ -93,10 +91,15 @@ db.on('error', (err) => {
 
 app.use('/images', images);
 
+app.use((err, req, res, next) => {
+  console.log('ERROR');
+  res.status(400).send({error: err.message});
+});
+
 app.post(
   '/login',
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/login.html',
+    failureRedirect: '/login.html'
   })
 );
