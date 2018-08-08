@@ -90,6 +90,13 @@ body {
   }
 }
 
+.user {
+  padding: 1rem;
+  &__name {
+
+  }
+}
+
 .thumbnail {
   @extend %g-third;
 

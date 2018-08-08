@@ -67,6 +67,9 @@ body {
     color: #088da5;
     text-decoration: underline; }
 
+.user {
+  padding: 1rem; }
+
 .thumbnail__list {
   height: auto;
   clear: both;
