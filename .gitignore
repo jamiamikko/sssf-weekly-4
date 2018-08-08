@@ -59,3 +59,9 @@ typings/
 
 # next.js build output
 .next
+
+# Custom
+.eslintrc.js
+.DS_Store
+public/uploads
+config
