@@ -103,7 +103,7 @@ const submitEditForm = (event, id) => {
 
   console.log(jsonData);
 
-  fetch('https://localhost:3000/update/' + id, {
+  fetch('https://localhost:3000/images/' + id, {
     method: 'POST',
     body: jsonData,
     headers: {
@@ -115,7 +115,7 @@ const submitEditForm = (event, id) => {
       console.log(data);
       closeModal();
 
-      getData().then((res) => {
+      getImages().then((res) => {
         handleData(res);
       });
     })
@@ -127,7 +127,7 @@ const submitEditForm = (event, id) => {
 const openEditModal = (event) => {
   const id = event.target.parentElement.getAttribute('id');
 
-  getDataById(id)
+  getImagesById(id)
     .then((res) => {
       console.log(res);
       modal.innerHTML = '';
@@ -258,13 +258,13 @@ const submitForm = (event) => {
 
   const formData = new FormData(addImageForm);
 
-  fetch('https://localhost:3000/upload', {
+  fetch('https://localhost:3000/images', {
     method: 'PUT',
     body: formData
   })
-    .then((res) => {
+    .then(() => {
       console.log('Success');
-      getData().then((res) => {
+      getImages().then((res) => {
         handleData(res);
       });
     })
@@ -277,14 +277,12 @@ const deleteImage = (event) => {
   const thumbnail = event.target.parentElement;
   const id = thumbnail.getAttribute('id');
 
-  const url = 'https://localhost:3000/delete/' + id;
-
-  fetch(url, {
+  fetch('https://localhost:3000/images/' + id, {
     method: 'DELETE'
   })
     .then((res) => {
       console.log('Success');
-      getData().then((res) => {
+      getImages().then((res) => {
         handleData(res);
       });
     })
@@ -293,9 +291,9 @@ const deleteImage = (event) => {
     });
 };
 
-const getDataBySearch = (title) =>
+const getImagesBySearch = (title) =>
   new Promise((resolve, reject) => {
-    fetch('https://localhost:3000/search?title=' + title)
+    fetch('https://localhost:3000/images/search?title=' + title)
       .then((res) => {
         resolve(res.json());
       })
@@ -304,9 +302,9 @@ const getDataBySearch = (title) =>
       });
   });
 
-const getDataById = (id) =>
+const getImagesById = (id) =>
   new Promise((resolve, reject) => {
-    fetch('https://localhost:3000/get-images/' + id)
+    fetch('https://localhost:3000/images/' + id)
       .then((res) => {
         resolve(res.json());
       })
@@ -315,9 +313,9 @@ const getDataById = (id) =>
       });
   });
 
-const getData = () =>
+const getImages = () =>
   new Promise((resolve, reject) => {
-    fetch('https://localhost:3000/get-images')
+    fetch('https://localhost:3000/images')
       .then((res) => {
         resolve(res.json());
       })
@@ -330,7 +328,7 @@ const filterSearch = (event) => {
   const value = event.target.value.toLowerCase();
 
   if (!value) {
-    getData()
+    getImages()
       .then((res) => {
         handleData(res);
       })
@@ -338,7 +336,7 @@ const filterSearch = (event) => {
         console.log(err);
       });
   } else {
-    getDataBySearch(value)
+    getImagesBySearch(value)
       .then((res) => {
         handleData(res);
       })
@@ -350,7 +348,7 @@ const filterSearch = (event) => {
 
 
 const init = () => {
-  getData()
+  getImages()
     .then((res) => {
       handleData(res);
     })
