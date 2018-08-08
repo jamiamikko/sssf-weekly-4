@@ -1,0 +1,37 @@
+{
+  "view": "View",
+  "tabs": [
+    {
+      "value": "View",
+      "content": "#view",
+      "isActive": true
+    },
+    {
+      "value": "Add",
+      "content": "#add",
+      "isActive": false
+    }
+  ],
+  "categories": {
+    "title": "Sort by category:",
+    "options": [
+      {
+        "value": "Wife",
+        "id": "sort-wife"
+      },
+      {
+        "value": "Girlfriend",
+        "id": "sort-girlfriend"
+      },
+      {
+        "value": "All",
+        "id": "sort-reset"
+      }
+    ]
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search by title"
+  },
+  "date": "Date on"
+}

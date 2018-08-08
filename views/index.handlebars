@@ -3,28 +3,29 @@
         <span class="user__name">Welcome {{ username }}</span>
     </section>
     <section class="tabs">
-        <a class="tab active" data-content="#view">View</a>
-        <a class="tab" data-content="#add">Add</a>
+        {{#each content.tabs}}
+        <a class="tab{{#if this.isActive}} active{{/if}}" data-content="{{this.content}}">{{ this.value }}</a>
+        {{/each}}
     </section>
     <section class="tab__wrapper">
         <div id="view" class="tab__content open">
             <section class="container">
                 <div class="container--half">
-                    <h3>Sort by category:</h3>
-                    <button class="button" id="sort-wife">Wife</button>
-                    <button class="button" id="sort-girlfriend">Girlfriend</button>
-                    <button class="button" id="sort-reset">All</button>
+                    <h3>{{ content.categories.title }}</h3>
+                    {{#each content.categories.options}}
+                    <button class="button" id="{{this.id}}">{{this.value}}</button>
+                    {{/each}}
                 </div>
                 <div class="container--half">
-                    <h3>Search</h3>
+                    <h3>{{ content.search.title }}</h3>
                     <form class="form">
-                        <input type="text" id="search" placeholder="Search by title">
+                        <input type="text" id="search" placeholder="{{ content.search.placeholder }}">
                     </form>
                 </div>
             </section>
             <section class="container">
                 <div>
-                    <button class="button" id="display-date">Date on</button>
+                    <button class="button" id="display-date">{{ content.date }}</button>
                 </div>
                 <ul id="thumbnail-list" class="thumbnail__list">
                 </ul>
