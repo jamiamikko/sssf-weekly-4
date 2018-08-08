@@ -1,24 +1,11 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const sharp = require('sharp');
 const path = require('path');
 const multer = require('multer');
 const uuid = require('uuid/v4');
 const fs = require('fs');
 const router = express.Router();
-
-const imgDataSchema = new mongoose.Schema({
-  time: {type: String, required: true},
-  category: {type: String, required: true},
-  title: {type: String, required: true},
-  details: {type: String, required: true},
-  coordinates: {type: Object, required: true},
-  thumbnail: String,
-  image: String,
-  original: {type: String, required: true}
-});
-
-const ImgData = mongoose.model('ImgData', imgDataSchema);
+const ImgData = require('../db/Image');
 
 const convertImage = (file, height, width) =>
   new Promise((resolve, reject) => {

@@ -6,35 +6,17 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+
+require('./passport')(passport);
+
 const fs = require('fs');
 const mongoose = require('mongoose');
 
 const images = require('./routes/images');
+const auth = require('./routes/auth');
 
 const express = require('express');
 const app = express();
-
-passport.use(
-  new LocalStrategy((username, password, done) => {
-    if (
-      username !== process.env.USERNAME ||
-      password !== process.env.PASSWORD
-    ) {
-      done(null, false, {message: 'Incorrect credentials'});
-      return;
-    }
-    return done(null, {username: username});
-  })
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
 
 app.use(
   session({
@@ -90,16 +72,9 @@ db.on('error', (err) => {
 });
 
 app.use('/images', images);
+app.use('/login', auth(passport));
 
 app.use((err, req, res, next) => {
   console.log('ERROR');
   res.status(400).send({error: err.message});
 });
-
-app.post(
-  '/login',
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login.html'
-  })
-);
