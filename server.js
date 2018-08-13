@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const handlebars = require('express-handlebars');
+const helmet = require('helmet');
 
 require('./passport')(passport);
 
@@ -40,6 +41,7 @@ app.use(
   })
 );
 
+app.use(helmet());
 app.use(passport.initialize());
 app.use(passport.session());
 
