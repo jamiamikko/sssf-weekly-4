@@ -121,9 +121,11 @@ img {
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    float: left; }
+    float: right; }
     .modal__close:hover {
       text-decoration: underline; }
+    .modal__close::before {
+      content: 'X'; }
   .modal__image {
     margin-bottom: 3rem; }
 

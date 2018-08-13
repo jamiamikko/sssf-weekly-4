@@ -33,5 +33,21 @@
     "title": "Search",
     "placeholder": "Search by title"
   },
-  "date": "Date on"
+  "date": "Date on",
+  "thumbnail": {
+    "buttons": {
+      "view": "View",
+      "edit": "Edit"
+    }
+  },
+  "labels": {
+    "category": "Category",
+    "title": "Title",
+    "description": "Description",
+    "image": "Image"
+  },
+  "buttons": {
+    "save": "Save",
+    "submit": "Submit"
+  }
 }

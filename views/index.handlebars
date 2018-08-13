@@ -39,29 +39,29 @@
                     <p class="thumbnail__date hidden"></p>
                     <p class="thumbnail__title"></p>
                     <p class="thumbnail__description"></p>
-                    <button class="button thumbnail__view-button">View</button>
-                    <button class="button thumbnail__edit-button">Edit</button>
+                    <button class="button thumbnail__view-button">{{ content.thumbnail.buttons.view }}</button>
+                    <button class="button thumbnail__edit-button">{{ content.thumbnail.buttons.edit }}</button>
                 </li>
             </template>
             <template id="view-modal">
                 <div class="modal__inner">
-                    <button class="modal__close">X</button>
+                    <button class="modal__close"></button>
                     <img class="modal__image">
                 </div>
             </template>
             <template id="edit-modal">
                 <div class="modal__inner">
-                    <button class="modal__close">X</button>
+                    <button class="modal__close"></button>
                     <form id="edit-image" class="form" enctype="multipart/form-data">
                         <input id="edit-latitude" type="hidden" name="latitude">
                         <input id="edit-longitude" type="hidden" name="longitude">
-                        <label for="category">Category</label>
+                        <label for="category">{{ content.labels.category }}</label>
                         <input class="half" type="text" id="edit-category" name="category">
-                        <label for="title">Title</label>
+                        <label for="title">{{ content.labels.title }}</label>
                         <input class="half" type="text" id="edit-title" name="title">
-                        <label for="description">Description</label>
+                        <label for="description">{{ content.labels.description }}</label>
                         <textarea class="half" id="edit-description" name="description"></textarea>
-                        <button class="button" type="submit">Save</button>
+                        <button class="button" type="submit">{{ content.buttons.save }}</button>
                     </form>
                 </div>
             </template>
@@ -73,15 +73,15 @@
                 <form id="add-image" class="form" enctype="multipart/form-data">
                     <input id="add-latitude" type="hidden" name="latitude">
                     <input id="add-longitude" type="hidden" name="longitude">
-                    <label for="category">Category</label>
+                    <label for="category">{{ content.labels.category }}</label>
                     <input class="half" type="text" id="add-category" name="category">
-                    <label for="title">Title</label>
+                    <label for="title">{{ content.labels.title }}</label>
                     <input class="half" type="text" id="add-title" name="title">
-                    <label for="description">Description</label>
+                    <label for="description">{{ content.labels.description }}</label>
                     <textarea class="half" id="add-description" name="description"></textarea>
-                    <label for="image">Image</label>
+                    <label for="image">{{ content.labels.image }}</label>
                     <input id="image" name="image" type="file">
-                    <button class="button" type="submit">Submit</button>
+                    <button class="button" type="submit">{{ content.buttons.submit }}</button>
                 </form>
             </section>
         </div>
