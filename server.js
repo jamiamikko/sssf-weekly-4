@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const handlebars = require('express-handlebars');
+let acl = require('acl');
 const helmet = require('helmet');
 
 require('./passport')(passport);
@@ -72,7 +73,11 @@ mongoose
     }:${process.env.DB_PORT}/test`,
     {useNewUrlParser: true}
   )
-  .then(() => {})
+  .then((db) => {
+    acl = new acl(new acl.mongodbBackend(db, 'acl_'));
+
+    console.log(acl);
+  })
   .catch((err) => {
     console.log(err);
   });

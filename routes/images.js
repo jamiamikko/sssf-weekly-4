@@ -102,8 +102,9 @@ router.put('/', upload, (req, res, next) => {
           dataObj.image = response.replace('public/', '');
 
           const data = new ImgData(dataObj);
-          data.save();
-          res.sendStatus(200);
+          data.save().then(() => {
+            res.sendStatus(200);
+          });
         })
         .catch((err) => {
           console.log(err);
